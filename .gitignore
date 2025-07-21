@@ -7,3 +7,12 @@
 .env.development
 .env.test
 .env.production 
+
+
+__pycache__/
+
+#Logs
+wandb/
+
+#Results
+results/

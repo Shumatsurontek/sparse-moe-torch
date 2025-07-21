@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import logging
+from sparse_moe.hf_model import MiniMoEConfig, MiniMoEHFModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("SparseMoE")
@@ -121,11 +122,11 @@ class MiniMoETransformer(nn.Module):
 
 
 # Test/demo
-batch_size = 2
-seq_len = 10
-dim = 128
-num_experts = 4
-top_k = 2
+batch_size = 16
+seq_len = 1024
+dim = 512
+num_experts = 16
+top_k = 4
 
 model = MiniMoETransformer(dim=dim, num_experts=num_experts)
 dummy_input = torch.randn(batch_size, seq_len, dim)
@@ -146,3 +147,5 @@ with torch.no_grad():
         for i in range(num_experts):
             counts[i] += (expert_ids == i).sum()
     logger.info(f"[Test] Token count per expert: {counts}")
+
+
