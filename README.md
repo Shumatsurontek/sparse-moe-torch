@@ -10,6 +10,28 @@ Ce projet implémente un Transformer minimaliste avec une couche Mixture-of-Expe
 - Les sorties des experts sont pondérées par un softmax appliqué uniquement sur les logits top-k, puis sommées pour chaque token.
 - Le module est intégré dans un bloc Transformer classique (self-attention + MoE).
 
+## 🧮 Formulation mathématique
+
+Le routage sparse MoE s’écrit ainsi :
+
+- Soit \( E = \{f_1, ..., f_N\} \) les experts, \( N \) leur nombre.
+- Pour chaque token \( x \), le routeur calcule des scores :
+  \[
+  s = Wx + b \in \mathbb{R}^N
+  \]
+- On sélectionne les indices des \( k \) plus grands scores :
+  \[
+  I = \text{TopK}(s, k)
+  \]
+- Les poids de gating sont :
+  \[
+  g = \text{softmax}(s_I)
+  \]
+- La sortie du MoE pour ce token est :
+  \[
+  y = \sum_{i \in I} g_i \cdot f_i(x)
+  \]
+
 ## Structure du code
 
 - `SparseMoE` : la couche MoE sparse, avec routage dynamique et logs détaillés.
