@@ -1,0 +1,19 @@
+[project]
+name = "sparse-moe-torch"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets>=4.0.0",
+    "einops>=0.8.1",
+    "matplotlib>=3.10.3",
+    "numpy>=2.3.1",
+    "seaborn>=0.13.2",
+    "tensorboard>=2.20.0",
+    "torch>=2.7.1",
+    "torchaudio>=2.7.1",
+    "torchvision>=0.22.1",
+    "transformers>=4.53.2",
+    "wandb>=0.21.0",
+]
